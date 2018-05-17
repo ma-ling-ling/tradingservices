@@ -1,0 +1,41 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "Home", root_path, class: "navbar-brand" %>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Find a Service", root_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Provide a Service", new_service_path %></li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if signed_in? %>
+            <li><%= link_to "View Cart", view_cart_path %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.point_bank %> points available | 
+                <%= current_user.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li> <%= link_to "Booked Services I'm Getting", recipient_history_path %> </li>
+                <li> <%= link_to "Booked Services I'm Providing", provider_history_path %> </li>
+                <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Login to Your Free Account To Trade Services", new_user_session_path, style: "color:red" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>

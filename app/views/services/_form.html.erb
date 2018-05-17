@@ -1,0 +1,54 @@
+<div class="well">
+<%= form_with(model: service, local: true) do |form| %>
+  <% if service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+      <% service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :name_of_service %>
+      <%= form.text_field :name, id: :service_name, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :category_id %>
+      <%= form.select(:category_id, @categories.collect { |c| [c.name, c.id]}, { include_blank: "Select Category"}, required: true, class: 'form-control') %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :service_description, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :minimum_number_of_hours_you_will_accept_for_a_booking %>
+      <%= form.text_field :duration_min, id: :service_duration_min, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :maximum_number_of_hours_that_you_will_accept_for_a_booking %>
+      <%= form.text_field :duration_max, id: :service_duration_max, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :point_value_per_hour %>
+      <%= form.text_field :point_value, id: :service_point_value, class: 'form-control' %>
+    </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
+    <br />
+
+    <div class="actions">
+      <%= form.submit class:'btn btn-success' %>
+    </div>
+  </div>
+<% end %>
+</div>

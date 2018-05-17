@@ -1,0 +1,52 @@
+<h3> Orders History </h3>
+
+<h4> Thanks for your past orders, <%= current_user.name %>!  Here is the list of services that you have booked...  </h4>
+
+<p> <em> If you haven't received one of these service yet, please reach out to the provider directly to coordinate. <br>
+(The provider's email address is listed next to their name in the bookings, below.)  </em></p> 
+
+
+
+<% @orders.each do |order| %>
+	<div class = "panel panel-default">
+		<div class="panel-heading">
+			<p><strong> Order ID: </strong><%= order.id %> </p>
+			<strong> Order Placed: </strong><%= order.created_at.strftime("%m/%d/%Y - %I%M%P") %> </p>
+		</div>
+		<div class = "panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Service</th>
+						<th> Provider</th>
+						<th> Provider's Email Address </th>
+						<th> Initial Message to Provider </th>
+						<th> Number of Hours Booked</th>
+						<th> Points per Hour</th>
+						<th> Total Points Required for This Booking </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @line_items.each do |lineitem| %>
+						<% if lineitem.order_id == order.id %>
+							<tr>
+								<td> <%= lineitem.service.name %></td>
+								<td> <%= lineitem.service.user.name %></td>
+								<td> <%= lineitem.service.user.email %> </td>
+								<td> <%= lineitem.message_to_provider %></td>
+								<td> <%= lineitem.hours_ordered %></td>
+								<td> <%= lineitem.service.point_value %></td>
+								<td> <%= lineitem.line_item_total %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class = "panel-footer">
+				<p> <strong> Subtotal: </strong> <%= order.subtotal %> </p>
+				<p> <strong> Fees: </strong> <%= order.fees  %> </p>
+				<p> <strong> Grand Total of Points Used for this Order: </strong> <%= order.grand_total %> </p>
+		</div>
+	</div>
+<% end %>

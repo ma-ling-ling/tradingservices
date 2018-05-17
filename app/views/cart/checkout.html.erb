@@ -1,0 +1,48 @@
+<h3> Let's review your order: </h3>
+
+
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th> Service You Ordered </th>
+				<th> Provider </th>
+				<th> Hours You Ordered </th>
+				<th> Points Per Hour </th>
+				<th> Your Message to Provider </th>
+				<th> Total Points Required </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @line_items.each do |line_item| %>
+				<% if line_item.order_id == @order.id %>
+					<tr>
+						<td><%= line_item.service.name %> </td>
+						<td><%= line_item.service.user.name %> </td>
+						<td><%= line_item.hours_ordered %> </td>
+						<td><%= line_item.service.point_value %> </td>
+						<td><%= line_item.message_to_provider %> </td>
+						<td><%= line_item.line_item_total %> </td>
+					</tr>
+				<%end%>
+			<% end %>
+		</tbody>
+	</table>
+
+<p>
+<strong> Sub Total: </strong> <%= @order.subtotal %> points <br>
+<strong> Fees:  </strong> <%= @order.fees %> points  --- <em> To thank you as an early user, we waive are waiving all fees for you! ♥ </em> <br> 
+<strong> Order Total:</strong> <%= @order.grand_total %> points <br>
+
+</p>
+
+
+
+<%= link_to "Back to Cart", view_cart_path, class: "btn btn-info" %>
+
+<% if current_user.point_bank >= @order.grand_total %>
+	<%= link_to "Yes, please book this order!", complete_order_path(point_exchange: @order.grand_total, order_id: @order.id), method: :post, class: "btn btn-success" %>
+
+<% else %>
+	<p> <br> It looks like your Order Total requires more points than you currently have available.  Please consider editing the items in your cart to lower the number of points you need to use, or try to post more services in order to get more points to trade. </p>
+	<%= link_to "Post More Services", new_service_path, class: "btn btn-warning" %>
+<% end %>

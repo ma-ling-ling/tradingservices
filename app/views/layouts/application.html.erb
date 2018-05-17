@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Collab</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+  </head>
+
+  <body>
+  	<%= render 'layouts/navbar' %>
+
+  <div id="flash">
+      <% flash.each do |type, message| %>   <!-- from page 66 of ecommerce tutorial --> 
+        <div class= "alert <%=bootstrap_class_for(type) %> fade-in">
+          <button class="close" data-dismiss="alert">X</button>
+          <%= message %>
+        </div>
+      <% end %>
+  </div>
+
+  	<div class = "container">
+ 	   <%= yield %>
+ 	 </div>
+ 	 
+  </body>
+</html>

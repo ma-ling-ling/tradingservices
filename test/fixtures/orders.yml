@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  line_items_id: 1
+  subtotal: 9.99
+  fees: 9.99
+  grand_total: 9.99
+
+two:
+  user_id: 1
+  line_items_id: 1
+  subtotal: 9.99
+  fees: 9.99
+  grand_total: 9.99

@@ -1,0 +1,39 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class="well">
+
+  <p>
+    <strong>Name:</strong>
+    <%= @service.name %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= @service.category.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @service.description %>
+  </p>
+
+  <p>
+    <strong>Minimum number of hours you will accept for a booking:</strong>
+    <%= @service.duration_min %>
+  </p>
+
+  <p>
+    <strong>Maximum number of hours you will accept for a booking:</strong>
+    <%= @service.duration_max %>
+  </p>
+
+  <p>
+    <strong>Point value:</strong>
+    <%= @service.point_value %>
+  </p>
+
+</div>
+
+<!-- <%#= link_to 'Edit', edit_service_path(@service) %> |-->
+<%= link_to 'Back', services_path, class: "btn btn-primary" %>
